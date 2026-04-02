@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem';
 import Spinner from './Spinner';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import sampleData from './../sampleOutput.json';
 
 export class News extends Component {
   static defaultProps = {
@@ -27,18 +28,17 @@ export class News extends Component {
         lastPage: false
     }
     document.title = `News Monkey - ${this.props.category === '' ? 'Top Headlines' : (this.props.category.charAt(0).toUpperCase() + this.props.category.slice(1))}`;
-    console.log('Title constructor to '+this.props.category);
   }
 
   async updateNews(pageNo) {
     const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}${this.props.category===''?'':'&category='+this.props.category}&apiKey=259c4da5249b4c06b998810aa7f54b98&page=${this.state.page+pageNo}&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
-    this.setState({articles: parsedData.articles, loading: false, page: (pageNo === 0 ? 1 : this.state.page+pageNo), totalResults: parsedData.totalResults });
+    this.setState({articles: parsedData.articles, loading: false, page: this.state.page+pageNo, totalResults: parsedData.totalResults });
   }
 
   async componentDidMount(){
-    this.setState({loading: true});
+    this.setState({loading: true, page: 1});
     await this.updateNews(0);
     this.setState({loading: false});
   }
@@ -66,7 +66,7 @@ export class News extends Component {
   render() {
     return (
       <>
-        <h2 className="text-center my-3">News Monkey {this.props.key==='' ? '- Top Headlines': '- '+this.props.key}</h2>
+        <h2 className="text-center my-3">News Monkey - {this.props.category === '' ? 'Top Headlines' : (this.props.category.charAt(0).toUpperCase() + this.props.category.slice(1))}</h2>
         {this.state.loading ? <Spinner/> : null}
         {this.state.loading ? null : 
           <div className="container p-0">
