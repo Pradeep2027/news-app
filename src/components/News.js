@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem';
-import {RotatingLines} from 'react-loader-spinner';
+import Spinner from './Spinner';
+
 
 export class News extends Component {
   constructor(){
@@ -54,18 +55,18 @@ export class News extends Component {
     return (
       <>
         <h2 className="text-center my-3">News Monkey - Top Headlines</h2>
-        {this.state.loading ? <div className="container d-flex justify-content-center" style={{height: "74vh", alignItems: "center"}}>
-          <RotatingLines strokeColor="#0d6efd" strokeWidth="5" animationDuration="1.25" width="500" visible={true}/>
-        </div> : null}
-        <div className="container p-0">
-          <div className="row my-2">
-            {this.state.articles.map((a) => {
-              return (
-                <NewsItem key={a.url} title={a.title} description={a.description} urlToImage={a.urlToImage} url={a.url}></NewsItem>
-              );
-            })}
+        {this.state.loading ? <Spinner/> : null}
+        {this.state.loading ? null : 
+          <div className="container p-0">
+            <div className="row my-2">
+              {this.state.articles.map((a) => {
+                return (
+                  <NewsItem key={a.url} title={a.title} description={a.description} urlToImage={a.urlToImage} url={a.url}></NewsItem>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        }
         <div className="container px-0 d-flex justify-content-between">
           <button disabled={this.state.page<=1} className="btn btn-primary" onClick={this.handlePrevClick}>&larr; Prev</button>
           <button disabled={this.state.lastPage} className="btn btn-primary" onClick={this.handleNextClick}>Next &rarr;</button>
