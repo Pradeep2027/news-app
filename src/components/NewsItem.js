@@ -4,7 +4,7 @@ export class NewsItem extends Component {
   render() {
     let {title, description, urlToImage, url} = this.props;
     return (
-      <div className="col-md-3 my-2 border" style={{ width: "18rem" }}>
+      <div className="col-md-3 my-2 border">
         <img src={urlToImage?urlToImage:dummyImage} className="card-img-top" alt="image-not-found" />
         <div className="card-body">
           <h5 className="card-title">{title ?title.slice(0,47)+'...' : ''}</h5>
