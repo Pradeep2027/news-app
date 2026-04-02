@@ -26,10 +26,11 @@ export class News extends Component {
         page: 1,
         lastPage: false
     }
+    document.title = `News Monkey - ${this.props.category === '' ? 'Top Headlines' : (this.props.category.charAt(0).toUpperCase() + this.props.category.slice(1))}`;
+    console.log('Title constructor to '+this.props.category);
   }
 
   async updateNews(pageNo) {
-    document.title = 'News Monkey - ' + (this.props.key === '' ? 'Top Headlines' : this.props.key);
     const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}${this.props.category===''?'':'&category='+this.props.category}&apiKey=259c4da5249b4c06b998810aa7f54b98&page=${this.state.page+pageNo}&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -39,7 +40,6 @@ export class News extends Component {
   async componentDidMount(){
     this.setState({loading: true});
     await this.updateNews(0);
-    document.title = 'News Monkey - '+(this.props.key === '' ? 'Top Headlines' : this.props.key);
     this.setState({loading: false});
   }
 
