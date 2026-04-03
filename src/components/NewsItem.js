@@ -4,7 +4,7 @@ export class NewsItem extends Component {
   render() {
     let {title, description, urlToImage, url, author, date, source} = this.props;
     return (
-      <div className="col-md-4 my-2 border">
+      <div className="col-md-4 col-sm-6 mb-2">
         <div className="card">
           <span className="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-info z-1">{source}</span>
           <img src={urlToImage?urlToImage:dummyImage} className="card-img-top" alt="image-not-found" />
