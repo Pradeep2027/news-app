@@ -2,6 +2,14 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
 
 export class NavBar extends Component {
+  state = {search: ""};
+
+  searchFun = (e) => {
+    e.preventDefault();
+    this.props.handleSearch(this.state.search);
+    this.setState({search: ""});
+  }
+  
   render() {
     return (
       <>
@@ -21,6 +29,19 @@ export class NavBar extends Component {
               <li className="nav-item"><Link className="nav-link" to="/sports">Sports</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/technology">Technology</Link></li>
             </ul>
+            {/* <form className="d-flex" role="search" onSubmit={this.handleSearch}>
+              <input className="form-control me-2" type="search" placeholder="Search news" aria-label="Search"
+                value={this.state.search}
+                onChange={(e)=>this.setState({search:e.target.value})}
+              />
+              <button className="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form> */}
+            <form className="d-flex ms-auto" onSubmit={this.searchFun}>
+              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={this.state.search} onChange={(e)=>this.setState({search:e.target.value})} />
+              <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
           </div>
         </div>
       </nav>

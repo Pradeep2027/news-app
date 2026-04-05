@@ -6,7 +6,9 @@ export class NewsItem extends Component {
     return (
       <div className="col-md-4 col-sm-6 mb-2">
         <div className="card">
-          <span className="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-info z-1">{source}</span>
+          <div className="d-flex justify-content-end position-absolute right-0">
+            <span className="badge rounded-pill bg-info">{source}</span>
+          </div>
           <img src={urlToImage?urlToImage:dummyImage} className="card-img-top" alt="image-not-found" />
           <div className="card-body">
             <h5 className="card-title">{title ?title.slice(0,47)+'...' : ''}</h5>
