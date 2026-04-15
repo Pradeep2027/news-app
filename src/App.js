@@ -12,7 +12,9 @@ export default function App () {
   const [query, setQuery] = useState('');
   const apiKey = process.env.REACT_APP_NEWS_API;
 
-  const handleSearch = (search) => { setQuery(search); }
+  const handleSearch = (search) => { 
+    setQuery(search);
+  }
   
   return (
     <>
